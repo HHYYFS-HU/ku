@@ -1,0 +1,58 @@
+#include <cstdlib>
+#include <iostream>
+#include <cstring>
+#include <windows.h>
+using namespace std;
+
+class CStringNum
+{
+public:
+ CStringNum(const char*pcStr);
+
+ CStringNum(const CStringNum&src);
+
+ ~CStringNum()
+ {
+    delete m_sNum;
+ }
+ void ppp()
+ {
+    cout << m_sNum;
+ }
+public:
+
+ CStringNum& operator=(const CStringNum&src);
+ //设置整数值
+ CStringNum& SetValue(int nValue);
+ //两个字符串表示的整数相乘 （10 分）
+ friend CStringNum operator*(const CStringNum& a,const CStringNum& b);
+public:
+ char*m_sNum; //以字符串表示的整数，如："12345678"表示整数 12345678
+};
+CStringNum::CStringNum(const char*pcStr)
+{
+    cout << "CString构造函数" << endl;
+        int iLen = strlen(pcStr);
+        m_sNum = new char[iLen+1];
+        strcpy(m_sNum, pcStr);
+}
+
+CStringNum::CStringNum(const CStringNum&src)
+{
+    int len = strlen(src.m_sNum);
+    m_sNum= new char[len+1];
+    strcpy(m_sNum,src.m_sNum);
+
+}
+int main()
+{
+    SetConsoleOutputCP(CP_UTF8);
+    CStringNum a("你好");
+    CStringNum b = a;
+    a.ppp();
+    b.ppp();
+    char * s = "n";
+    fgets(s,10,stdin);
+    cout << s << endl;
+    return 0;
+}
